@@ -18,18 +18,36 @@ class Database
         if ($statement) {
             $check = $statement->execute($data);
             if ($check) {
-                $resultType = PDO::FETCH_OBJ;
-                if($type !== 'object') {
+                if ($type === 'object') {
+                    $resultType = PDO::FETCH_OBJ;
+                } else {
                     $resultType = PDO::FETCH_ASSOC;
                 }
 
                 $result = $statement->fetchAll($resultType);
 
-                if(is_array($result) && count($result) > 0) {
+                if (is_array($result) && count($result) > 0) {
                     return $result;
                 }
             }
         }
         return false;
+    }
+
+    public function create_tables()
+    {
+        $query = "
+            CREATE TABLE IF NOT EXISTS `users` (
+            `id` int NOT NULL AUTO_INCREMENT,
+            `email` varchar(100) NOT NULL,
+            `password` varchar(255) NOT NULL,
+            `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (`id`),
+            KEY `email` (`email`),
+            KEY `created_at` (`created_at`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+        ";
+
+        $this->query($query);
     }
 }
