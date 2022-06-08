@@ -16,6 +16,7 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
     define('DB_USER', 'root');
     define('DB_PASS', 'Aman@1234');
     define('DB_DRIVER', 'mysql');
+    define('APP_ROOT', 'http://localhost/udemy-clone-php/public');
 } else {
     // config for live server
     define('DB_HOST', "");
@@ -23,4 +24,5 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
     define('DB_USER', "");
     define('DB_PASS', "");
     define('DB_DRIVER', 'mysql');
+    define('APP_ROOT', 'http://localhost');
 }
